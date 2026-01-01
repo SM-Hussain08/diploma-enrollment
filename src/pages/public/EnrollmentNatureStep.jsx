@@ -59,7 +59,7 @@ export default function EnrollmentNatureStep({ enrollmentData, setEnrollmentData
   return (
     <div style={styles.container}>
       <header style={styles.header}>
-        <h2 style={styles.title}>{"Enrollment Nature"}</h2>
+        <h2 style={styles.title}>{"Enrollment Nature!!!"}</h2>
         <div style={styles.badge}>Step 1</div>
       </header>
 
