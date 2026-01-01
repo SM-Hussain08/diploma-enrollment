@@ -102,7 +102,7 @@ export default function AdminDashboard() {
               ))}
             </div>
           </div>
-          <div className="lock-footer">Read-only Configuration</div>
+          <div className="lock-footer">🔒 Read-only Configuration</div>
         </section>
 
         {/* MESSAGING - Compact Stack */}

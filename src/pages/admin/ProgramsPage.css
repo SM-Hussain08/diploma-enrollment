@@ -1,17 +1,21 @@
 :root {
   --maroon: #800000;
   --navy-bg: #001226;
-  --text-main: #0f172a; /* Deep Slate for readability */
+  --text-main: #0f172a;
   --text-muted: #64748b;
   --ivory-input: #fdfaf3;
   --danger-red: #c53030;
+  --transition-fast: 0.2s ease;
+  --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* BASE ANIMATION */
 .programs-view {
   animation: fadeIn 0.5s ease-out;
+  width: 100%;
 }
 
-/* HEADER PLACEMENT */
+/* HEADER PLACEMENT - ADAPTIVE */
 .programs-header-row {
   display: flex;
   justify-content: space-between;
@@ -19,12 +23,13 @@
   margin-bottom: 30px;
   padding-bottom: 20px;
   border-bottom: 2px solid #e2e8f0;
+  gap: 15px;
 }
 
-.title-group h2 { color: var(--navy-bg); font-weight: 800; margin: 0; }
+.title-group h2 { color: var(--navy-bg); font-weight: 800; margin: 0; font-size: 24px; }
 .title-group p { color: var(--text-muted); margin: 5px 0 0; font-size: 14px; }
 
-/* SAVE BUTTON STYLES */
+/* SAVE BUTTON LOGIC */
 .save-catalog-btn {
   padding: 10px 22px;
   border-radius: 8px;
@@ -32,19 +37,20 @@
   font-weight: 700;
   font-size: 13px;
   cursor: pointer;
-  transition: 0.3s;
+  transition: var(--transition-smooth);
   background: #e2e8f0;
   color: #94a3b8;
+  white-space: nowrap;
 }
 
 .save-catalog-btn.active-pulse {
   background: var(--maroon);
   color: white;
-  box-shadow: 0 4px 15px rgba(128,0,0,0.3);
+  box-shadow: 0 4px 15px rgba(128, 0, 0, 0.3);
   animation: pulse-red 2s infinite;
 }
 
-/* GRID LAYOUT */
+/* GRID LAYOUT - TRANSFORMING */
 .programs-main-grid {
   display: grid;
   grid-template-columns: 320px 1fr;
@@ -58,9 +64,10 @@
   padding: 30px;
   border-radius: 20px;
   color: white;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
   position: sticky;
   top: 100px;
+  transition: var(--transition-smooth);
 }
 
 .badge-system {
@@ -70,21 +77,30 @@
   padding: 4px 10px;
   border-radius: 4px;
   text-transform: uppercase;
+  display: inline-block;
 }
 
 .sidebar-card h3 { margin: 20px 0 10px; font-size: 22px; }
-.instruction-text { color: rgba(255,255,255,0.5); font-size: 13px; line-height: 1.5; }
+.instruction-text { color: rgba(255, 255, 255, 0.5); font-size: 13px; line-height: 1.5; }
 
 .input-container-premium { margin: 25px 0; }
 .input-container-premium input {
   width: 100%;
   padding: 14px;
   border-radius: 10px;
-  border: 1px solid rgba(255,255,255,0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   background: var(--ivory-input);
-  color: var(--text-main); /* Readability fixed */
+  color: var(--text-main);
   font-weight: 600;
   box-sizing: border-box;
+  font-size: 14px;
+  transition: var(--transition-fast);
+}
+
+.input-container-premium input:focus {
+  outline: none;
+  border-color: var(--maroon);
+  box-shadow: 0 0 0 3px rgba(128, 0, 0, 0.2);
 }
 
 .add-action-btn {
@@ -96,69 +112,126 @@
   border-radius: 10px;
   font-weight: 700;
   cursor: pointer;
-  transition: 0.2s;
+  transition: var(--transition-fast);
 }
 
-.add-action-btn:hover { filter: brightness(1.2); }
-.drag-hint { font-size: 11px; color: rgba(255,255,255,0.3); margin-top: 20px; text-align: center; }
+.add-action-btn:hover { background: #a52a2a; transform: translateY(-1px); }
 
-/* DRAGGABLE ROWS */
-.cards-stack { display: flex; flex-direction: column; gap: 12px; }
+/* DRAGGABLE ROWS - ENHANCED */
+.cards-stack { display: flex; flex-direction: column; gap: 12px; width: 100%; }
 
 .prog-row {
   display: flex;
   align-items: center;
   background: white;
-  padding: 10px 20px;
-  border-radius: 12px;
+  padding: 12px 20px;
+  border-radius: 14px;
   border: 1px solid #e2e8f0;
   gap: 15px;
-  transition: 0.2s;
+  transition: var(--transition-fast);
 }
 
-.prog-row:hover { border-color: var(--maroon); }
+.prog-row:hover { 
+  border-color: var(--maroon); 
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
 
 .prog-row.is-dragging {
-  background: var(--maroon);
-  color: white;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  background: var(--maroon) !important;
+  color: white !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  z-index: 10;
 }
 
-.drag-icon { color: var(--text-muted); cursor: grab; font-size: 20px; }
+.drag-icon { color: var(--text-muted); cursor: grab; font-size: 20px; flex-shrink: 0; }
 .is-dragging .drag-icon { color: white; }
 
 .prog-input-edit {
   flex: 1;
-  border: none;
+  border: 1px solid transparent;
   background: var(--ivory-input);
   padding: 10px 15px;
   border-radius: 8px;
   font-weight: 600;
-  color: var(--text-main); /* Readability fixed */
+  color: var(--text-main);
+  font-size: 14px;
 }
 
-.is-dragging .prog-input-edit { background: rgba(255,255,255,0.1); color: white; }
+.prog-input-edit:focus {
+  background: white;
+  border-color: #cbd5e1;
+  outline: none;
+}
 
-/* RED DELETE BUTTON */
+.is-dragging .prog-input-edit { background: rgba(255, 255, 255, 0.1); color: white; }
+
 .prog-delete-btn {
   background: transparent;
   border: none;
   color: var(--danger-red);
-  font-weight: bold;
-  font-size: 16px;
+  font-size: 18px;
   cursor: pointer;
   padding: 8px;
-  border-radius: 6px;
-  transition: 0.2s;
+  border-radius: 8px;
+  transition: var(--transition-fast);
+  flex-shrink: 0;
 }
 
-.prog-delete-btn:hover { background: #fff5f5; transform: scale(1.2); }
+.prog-delete-btn:hover { background: #fff5f5; color: #e53e3e; transform: scale(1.1); }
 
+/* --- RESPONSIVE MEDIA QUERIES --- */
+
+@media (max-width: 1024px) {
+  .programs-main-grid {
+    grid-template-columns: 1fr; /* Stack vertically */
+    gap: 30px;
+  }
+
+  .sidebar-card {
+    position: relative; /* Unlock from sticky */
+    top: 0;
+    width: 100%;
+    padding: 24px;
+  }
+}
+
+@media (max-width: 600px) {
+  .programs-header-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .save-catalog-btn {
+    width: 100%;
+    padding: 14px;
+  }
+
+  .title-group h2 { font-size: 20px; }
+
+  .prog-row {
+    padding: 10px;
+    gap: 10px;
+  }
+
+  .prog-input-edit {
+    padding: 8px 10px;
+    font-size: 13px;
+  }
+
+  .drag-icon { font-size: 18px; }
+
+  .prog-delete-btn {
+    padding: 6px;
+    font-size: 16px;
+  }
+}
+
+/* KEYFRAMES */
 @keyframes pulse-red {
   0% { box-shadow: 0 0 0 0 rgba(128, 0, 0, 0.4); }
   70% { box-shadow: 0 0 0 12px rgba(128, 0, 0, 0); }
   100% { box-shadow: 0 0 0 0 rgba(128, 0, 0, 0); }
 }
 
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
+@keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }

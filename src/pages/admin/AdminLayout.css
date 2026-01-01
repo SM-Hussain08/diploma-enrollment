@@ -5,11 +5,16 @@
   --grad-nav: linear-gradient(90deg, var(--maroon-dark) 0%, var(--navy-dark) 100%);
 }
 
-/* Ensure the whole app takes up full width */
+/* GLOBAL RESET */
+* {
+  box-sizing: border-box;
+}
+
 body, html, #root {
   margin: 0;
   padding: 0;
   width: 100%;
+  overflow-x: hidden;
 }
 
 .admin-wrapper {
@@ -20,21 +25,17 @@ body, html, #root {
   background-color: #f0f2f5;
 }
 
-/* FULL WIDTH FLOATING HEADER */
+/* FLOATING HEADER */
 .admin-header-floating {
   background: var(--grad-nav);
-  height: 65px;
-  width: 100%; /* Force full width */
+  min-height: 65px;
+  width: 100%;
   display: flex;
   align-items: center;
   position: sticky;
   top: 0;
   z-index: 9999;
-  
-  /* Heavy Multi-Layered Shadow for Depth */
-  box-shadow: 
-    0 4px 6px -1px rgba(0, 0, 0, 0.2), 
-    0 10px 20px -5px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .nav-container-wall-to-wall {
@@ -42,8 +43,7 @@ body, html, #root {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 40px; /* Adjust side padding as needed */
-  box-sizing: border-box;
+  padding: 0 24px;
 }
 
 /* SECTION FLEXING */
@@ -52,58 +52,63 @@ body, html, #root {
   align-items: center;
 }
 
-.header-section.left { flex: 1; gap: 15px; }
+.header-section.left { flex: 1; gap: 12px; }
 .header-section.center { flex: 2; justify-content: center; }
-.header-section.right { flex: 1; justify-content: flex-end; gap: 20px; }
+.header-section.right { flex: 1; justify-content: flex-end; gap: 15px; }
 
-/* BRANDING STYLE */
+/* BRANDING STYLE WITH ANIMATION */
+@keyframes softFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
 .logo-card-mini {
   background: white;
-  padding: 5px 12px;
-  border-radius: 6px;
+  padding: 6px 10px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   gap: 8px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  animation: softFloat 4s ease-in-out infinite;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
-.nav-img { height: 20px; width: auto; }
-.nav-v-divider { width: 1px; height: 14px; background: #ccc; }
+.nav-img { height: 18px; width: auto; }
+.nav-v-divider { width: 1px; height: 14px; background: #ddd; }
 
-.brand-text-stack { display: flex; flex-direction: column; line-height: 1; }
-.txt-primary { color: white; font-weight: 800; font-size: 14px; letter-spacing: 0.5px; }
-.txt-secondary { color: rgba(255,255,255,0.4); font-size: 9px; font-weight: 700; }
+.brand-text-stack { display: flex; flex-direction: column; line-height: 1.1; }
+.txt-primary { color: white; font-weight: 800; font-size: 13px; letter-spacing: 0.5px; }
+.txt-secondary { color: rgba(255,255,255,0.5); font-size: 8px; font-weight: 700; text-transform: uppercase; }
 
 /* COMPACT TAB BAR */
 .tabs-wrapper {
   background: rgba(0, 0, 0, 0.2);
   padding: 4px;
-  border-radius: 10px;
+  border-radius: 12px;
   display: flex;
-  gap: 2px;
+  gap: 4px;
 }
 
 .nav-tab-item {
   text-decoration: none;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 255, 255, 0.7);
   padding: 8px 16px;
   font-size: 13px;
-  font-weight: 700;
-  border-radius: 6px;
-  transition: all 0.2s ease-in-out;
+  font-weight: 600;
+  border-radius: 8px;
+  white-space: nowrap;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* SUBTLE PROMINENT HOVER */
 .nav-tab-item:hover {
   color: white;
   background: rgba(255, 255, 255, 0.1);
-  transform: translateY(-2px);
 }
 
 .nav-tab-item.active {
-  background: white;
+  background: var(--white);
   color: var(--maroon-dark);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
 
 /* ACTION BUTTONS */
@@ -112,7 +117,7 @@ body, html, #root {
   font-size: 11px;
   font-weight: 700;
   background: rgba(255,255,255,0.1);
-  padding: 5px 12px;
+  padding: 6px 12px;
   border-radius: 50px;
   display: flex;
   align-items: center;
@@ -125,36 +130,83 @@ body, html, #root {
   background: #b30000;
   color: white;
   border: none;
-  padding: 8px 20px;
-  border-radius: 6px;
-  font-weight: 800;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 700;
   font-size: 12px;
   cursor: pointer;
-  transition: 0.3s;
+  transition: 0.2s;
 }
 
-.logout-btn-compact:hover {
-  background: white;
-  color: #b30000;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-}
+/* MOBILE ADAPTATION (SLEEKER & SMALLER) */
+@media (max-width: 1024px) {
+  .admin-header-floating {
+    flex-direction: column;
+    height: auto;
+    padding: 12px 0 8px 0;
+  }
 
-/* ANIMATION */
-@keyframes floatY {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-4px); }
+  .nav-container-wall-to-wall {
+    padding: 0 16px;
+    flex-wrap: wrap;
+  }
+
+  .header-section.left { flex: 1; }
+  .header-section.right { flex: 1; }
+  
+  /* Carousel Tabs Logic */
+  .header-section.center {
+    flex: 0 0 100%;
+    order: 3;
+    margin-top: 15px;
+    width: 100%;
+    overflow-x: auto;
+    justify-content: flex-start;
+    padding: 0 5px 5px 5px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .header-section.center::-webkit-scrollbar {
+    display: none;
+  }
+
+  .tabs-wrapper {
+    background: transparent;
+    padding: 0;
+    gap: 8px;
+  }
+
+  .nav-tab-item {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 6px 14px; /* Sleeker, smaller padding */
+    font-size: 11px;    /* Smaller text for mobile */
+    border-radius: 20px; /* Modern Pill shape */
+    color: #fff;
+  }
+
+  .nav-tab-item.active {
+    background: white;
+    color: var(--maroon-dark);
+    border-color: white;
+  }
+
+  .admin-badge-slim, .brand-text-stack { display: none; }
+  .logo-card-mini { padding: 4px 8px; }
+  .nav-img { height: 16px; }
 }
-.animate-float { animation: floatY 4s ease-in-out infinite; }
 
 /* CONTENT WRAPPER */
 .admin-main-view {
   width: 100%;
-  padding: 40px 0;
+  padding: 20px 0;
   display: flex;
   justify-content: center;
 }
 
 .content-container {
-  width: 95%; /* Makes content fit almost the whole page too */
+  width: 92%;
   max-width: 1800px;
 }
