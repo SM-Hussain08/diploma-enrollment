@@ -1,0 +1,160 @@
+:root {
+  --maroon-dark: #660000;
+  --navy-dark: #001a35;
+  --white: #ffffff;
+  --grad-nav: linear-gradient(90deg, var(--maroon-dark) 0%, var(--navy-dark) 100%);
+}
+
+/* Ensure the whole app takes up full width */
+body, html, #root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.admin-wrapper {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f0f2f5;
+}
+
+/* FULL WIDTH FLOATING HEADER */
+.admin-header-floating {
+  background: var(--grad-nav);
+  height: 65px;
+  width: 100%; /* Force full width */
+  display: flex;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+  
+  /* Heavy Multi-Layered Shadow for Depth */
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.2), 
+    0 10px 20px -5px rgba(0, 0, 0, 0.3);
+}
+
+.nav-container-wall-to-wall {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px; /* Adjust side padding as needed */
+  box-sizing: border-box;
+}
+
+/* SECTION FLEXING */
+.header-section {
+  display: flex;
+  align-items: center;
+}
+
+.header-section.left { flex: 1; gap: 15px; }
+.header-section.center { flex: 2; justify-content: center; }
+.header-section.right { flex: 1; justify-content: flex-end; gap: 20px; }
+
+/* BRANDING STYLE */
+.logo-card-mini {
+  background: white;
+  padding: 5px 12px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.nav-img { height: 20px; width: auto; }
+.nav-v-divider { width: 1px; height: 14px; background: #ccc; }
+
+.brand-text-stack { display: flex; flex-direction: column; line-height: 1; }
+.txt-primary { color: white; font-weight: 800; font-size: 14px; letter-spacing: 0.5px; }
+.txt-secondary { color: rgba(255,255,255,0.4); font-size: 9px; font-weight: 700; }
+
+/* COMPACT TAB BAR */
+.tabs-wrapper {
+  background: rgba(0, 0, 0, 0.2);
+  padding: 4px;
+  border-radius: 10px;
+  display: flex;
+  gap: 2px;
+}
+
+.nav-tab-item {
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.6);
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 700;
+  border-radius: 6px;
+  transition: all 0.2s ease-in-out;
+}
+
+/* SUBTLE PROMINENT HOVER */
+.nav-tab-item:hover {
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.nav-tab-item.active {
+  background: white;
+  color: var(--maroon-dark);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* ACTION BUTTONS */
+.admin-badge-slim {
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  background: rgba(255,255,255,0.1);
+  padding: 5px 12px;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dot-online { width: 6px; height: 6px; background: #00ff88; border-radius: 50%; box-shadow: 0 0 8px #00ff88; }
+
+.logout-btn-compact {
+  background: #b30000;
+  color: white;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 6px;
+  font-weight: 800;
+  font-size: 12px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.logout-btn-compact:hover {
+  background: white;
+  color: #b30000;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* ANIMATION */
+@keyframes floatY {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+.animate-float { animation: floatY 4s ease-in-out infinite; }
+
+/* CONTENT WRAPPER */
+.admin-main-view {
+  width: 100%;
+  padding: 40px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.content-container {
+  width: 95%; /* Makes content fit almost the whole page too */
+  max-width: 1800px;
+}

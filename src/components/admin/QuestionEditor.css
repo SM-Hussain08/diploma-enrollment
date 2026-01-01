@@ -1,0 +1,396 @@
+:root {
+  --maroon: #7a0c0c;
+  --navy: #0b1c33;
+  --border: #e5e7eb;
+  --soft-bg: #f8fafc;
+}
+
+/* CARD */
+.q-master-card {
+  background: white;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  margin-bottom: 14px;
+  overflow: hidden;
+  transition: box-shadow 0.2s ease;
+}
+
+.q-master-card:hover {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* HEADER */
+.q-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: linear-gradient(135deg, var(--maroon), var(--navy));
+  cursor: pointer;
+}
+
+.q-header-left,
+.q-header-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.q-drag-handle {
+  color: white;
+  opacity: 0.7;
+  cursor: grab;
+}
+
+/* TOGGLE */
+.q-toggle-switch {
+  position: relative;
+  width: 34px;
+  height: 18px;
+}
+.q-toggle-switch input {
+  opacity: 0;
+}
+.q-toggle-slider {
+  position: absolute;
+  inset: 0;
+  background: #94a3b8;
+  border-radius: 999px;
+}
+.q-toggle-slider::before {
+  content: "";
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  left: 2px;
+  bottom: 2px;
+  background: white;
+  border-radius: 50%;
+  transition: transform 0.2s;
+}
+input:checked + .q-toggle-slider {
+  background: #22c55e;
+}
+input:checked + .q-toggle-slider::before {
+  transform: translateX(16px);
+}
+
+/* INPUT */
+.q-label-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+}
+.q-label-input::placeholder {
+  color: #e2e8f0;
+}
+.q-label-input:focus {
+  outline: none;
+}
+
+/* BADGES */
+.q-badge {
+  font-size: 10px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  font-weight: 700;
+}
+.q-badge.required {
+  background: white;
+  color: var(--maroon);
+}
+.q-badge.lock {
+  background: #e5e7eb;
+  color: #334155;
+}
+
+/* TYPE */
+.q-type-pill {
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  font-size: 10px;
+  padding: 4px 8px;
+  border-radius: 999px;
+}
+
+/* BODY */
+.q-body {
+  padding: 16px;
+  background: var(--soft-bg);
+}
+
+/* SETTINGS */
+.q-settings-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px;
+  margin-bottom: 14px;
+}
+
+.q-settings-card h4 {
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  color: var(--navy);
+}
+
+.q-field-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+select {
+  width: 100%;
+  margin-top: 6px;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  font-size: 13px;
+}
+
+.q-type-description {
+  font-size: 12px;
+  color: #64748b;
+  margin-top: 6px;
+}
+
+/* FILE CONFIG */
+.q-pill-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.q-pill {
+  padding: 6px 10px;
+  font-size: 11px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: white;
+  cursor: pointer;
+}
+.q-pill.active {
+  background: var(--navy);
+  color: white;
+}
+
+/* OPTIONS */
+.q-opt-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 8px 10px;
+  margin-bottom: 8px;
+  transition: background 0.15s ease;
+}
+.q-opt-row:hover {
+  background: #f1f5f9;
+}
+
+.q-opt-drag {
+  cursor: grab;
+  color: #64748b;
+}
+
+.q-opt-input {
+  flex: 1;
+  border: none;
+  font-size: 13px;
+  background: transparent;
+}
+.q-opt-input:focus {
+  outline: none;
+}
+
+.q-opt-delete {
+  opacity: 0;
+  border: none;
+  background: none;
+  color: #ef4444;
+  cursor: pointer;
+}
+.q-opt-row:hover .q-opt-delete {
+  opacity: 1;
+}
+
+/* ADD */
+.q-add-btn {
+  margin-top: 10px;
+  width: 100%;
+  padding: 8px;
+  background: var(--navy);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.q-add-btn:hover {
+  opacity: 0.9;
+}
+
+/* DANGER */
+.q-danger-zone {
+  border-top: 1px dashed #fecaca;
+  padding-top: 12px;
+  text-align: right;
+}
+
+.q-delete-btn {
+  background: white;
+  border: 1px solid #fecaca;
+  color: #dc2626;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* ANIMATION */
+.animate-slide-down {
+  animation: slideDown 0.25s ease-out;
+}
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
+
+
+/* ===============================
+   TEXT COLOR CONTROL SECTION
+   Change colors here for:
+   - Labels
+   - Inputs
+   - Buttons
+   =============================== */
+
+.q-label-input {
+  color: white; /* Question text color (header) */
+}
+
+.q-opt-input {
+  color: #0f172a; /* ✅ Option text color (FIXED from white) */
+}
+
+.q-pill {
+  color: #0f172a; /* File option text color */
+}
+
+.q-pill.active {
+  color: white; /* Active pill text */
+}
+
+.q-add-btn {
+  color: white; /* Add option button text */
+}
+
+.q-delete-btn {
+  color: #dc2626; /* Delete question text */
+}
+
+/* ===============================
+   EXPLICIT MINIMIZE BUTTON
+   =============================== */
+.q-minimize-btn {
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 11px;
+  cursor: pointer;
+}
+.q-minimize-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* ===============================
+   OPTION TYPE INDICATORS
+   (visual only – no layout change)
+   =============================== */
+
+.q-option-indicator {
+  width: 14px;
+  height: 14px;
+  margin-right: 2px;
+  flex-shrink: 0;
+  border: 2px solid #64748b;
+}
+
+/* MCQ → circle */
+.q-option-indicator.multipleChoice {
+  border-radius: 50%;
+}
+
+/* Checkbox → square */
+.q-option-indicator.checkboxes {
+  border-radius: 3px;
+}
+
+/* Dropdown → stacked lines */
+.q-option-indicator.dropdown {
+  border-radius: 3px;
+  background: repeating-linear-gradient(
+    to bottom,
+    #64748b,
+    #64748b 2px,
+    transparent 2px,
+    transparent 4px
+  );
+}
+
+
+/* ===============================
+   FILE UPLOAD LABEL COLOR CONTROL
+   Change this to control:
+   - "Allowed Formats"
+   - "Max Size"
+   =============================== */
+.q-file-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  color: #334155; /* ← CHANGE LABEL COLOR HERE */
+  margin-bottom: 6px;
+}
+
+/* ===============================
+   MINIMIZE BUTTON (BOTTOM)
+   =============================== */
+.q-minimize-btn.bottom {
+  margin-right: 10px;
+  background: #e5e7eb;
+  color: #0f172a;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.q-minimize-btn.bottom:hover {
+  background: #d1d5db;
+}
+
+

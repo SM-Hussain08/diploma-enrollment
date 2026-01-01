@@ -1,0 +1,164 @@
+:root {
+  --maroon: #800000;
+  --navy-bg: #001226;
+  --text-main: #0f172a; /* Deep Slate for readability */
+  --text-muted: #64748b;
+  --ivory-input: #fdfaf3;
+  --danger-red: #c53030;
+}
+
+.programs-view {
+  animation: fadeIn 0.5s ease-out;
+}
+
+/* HEADER PLACEMENT */
+.programs-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.title-group h2 { color: var(--navy-bg); font-weight: 800; margin: 0; }
+.title-group p { color: var(--text-muted); margin: 5px 0 0; font-size: 14px; }
+
+/* SAVE BUTTON STYLES */
+.save-catalog-btn {
+  padding: 10px 22px;
+  border-radius: 8px;
+  border: none;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  transition: 0.3s;
+  background: #e2e8f0;
+  color: #94a3b8;
+}
+
+.save-catalog-btn.active-pulse {
+  background: var(--maroon);
+  color: white;
+  box-shadow: 0 4px 15px rgba(128,0,0,0.3);
+  animation: pulse-red 2s infinite;
+}
+
+/* GRID LAYOUT */
+.programs-main-grid {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+/* SIDEBAR CARD (DARK) */
+.sidebar-card {
+  background: var(--navy-bg);
+  padding: 30px;
+  border-radius: 20px;
+  color: white;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  position: sticky;
+  top: 100px;
+}
+
+.badge-system {
+  background: var(--maroon);
+  font-size: 10px;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+.sidebar-card h3 { margin: 20px 0 10px; font-size: 22px; }
+.instruction-text { color: rgba(255,255,255,0.5); font-size: 13px; line-height: 1.5; }
+
+.input-container-premium { margin: 25px 0; }
+.input-container-premium input {
+  width: 100%;
+  padding: 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: var(--ivory-input);
+  color: var(--text-main); /* Readability fixed */
+  font-weight: 600;
+  box-sizing: border-box;
+}
+
+.add-action-btn {
+  width: 100%;
+  background: var(--maroon);
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.add-action-btn:hover { filter: brightness(1.2); }
+.drag-hint { font-size: 11px; color: rgba(255,255,255,0.3); margin-top: 20px; text-align: center; }
+
+/* DRAGGABLE ROWS */
+.cards-stack { display: flex; flex-direction: column; gap: 12px; }
+
+.prog-row {
+  display: flex;
+  align-items: center;
+  background: white;
+  padding: 10px 20px;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  gap: 15px;
+  transition: 0.2s;
+}
+
+.prog-row:hover { border-color: var(--maroon); }
+
+.prog-row.is-dragging {
+  background: var(--maroon);
+  color: white;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.drag-icon { color: var(--text-muted); cursor: grab; font-size: 20px; }
+.is-dragging .drag-icon { color: white; }
+
+.prog-input-edit {
+  flex: 1;
+  border: none;
+  background: var(--ivory-input);
+  padding: 10px 15px;
+  border-radius: 8px;
+  font-weight: 600;
+  color: var(--text-main); /* Readability fixed */
+}
+
+.is-dragging .prog-input-edit { background: rgba(255,255,255,0.1); color: white; }
+
+/* RED DELETE BUTTON */
+.prog-delete-btn {
+  background: transparent;
+  border: none;
+  color: var(--danger-red);
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 6px;
+  transition: 0.2s;
+}
+
+.prog-delete-btn:hover { background: #fff5f5; transform: scale(1.2); }
+
+@keyframes pulse-red {
+  0% { box-shadow: 0 0 0 0 rgba(128, 0, 0, 0.4); }
+  70% { box-shadow: 0 0 0 12px rgba(128, 0, 0, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(128, 0, 0, 0); }
+}
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+

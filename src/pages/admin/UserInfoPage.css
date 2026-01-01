@@ -1,0 +1,298 @@
+/* ===============================
+   ROOT THEME VARIABLES
+   Used across admin management pages
+   =============================== */
+:root {
+  --navy: #0f172a;
+  --royal: #1e3a8a;
+  --sky: #3b82f6;
+  --slate-50: #f8fafc;
+  --slate-100: #f1f5f9;
+  --slate-200: #e2e8f0;
+  --slate-600: #64748b;
+  --white: #ffffff;
+}
+
+/* ===============================
+   PAGE WRAPPER
+   =============================== */
+.mgmt-page-wrapper {
+  background-color: #fcfcfd;
+  min-height: 100vh;
+  padding-bottom: 120px;
+}
+
+/* ===============================
+   STICKY HEADER (Premium Style)
+   =============================== */
+.mgmt-header-premium {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  padding: 24px 0;
+  background: rgba(252, 252, 253, 0.9);
+  transition: all 0.3s ease;
+}
+
+.mgmt-header-premium.is-scrolled {
+  padding: 14px 0;
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.85);
+  border-bottom: 1px solid var(--slate-200);
+}
+
+.header-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ===============================
+   HEADER BRAND + STATS
+   =============================== */
+.brand-stack h1 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--navy);
+  letter-spacing: -0.02em;
+}
+
+.brand-stack h2 {
+  font-size: 10pt;
+  font-weight: 300; /* Use 400 if 300 looks too faint */
+  color: #333333;
+  letter-spacing: -0.02em;
+  padding-left: 15px;
+}
+
+.form-stats-bar {
+  display: flex;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.stat-pill {
+  font-size: 10px;
+  padding: 3px 8px;
+  border-radius: 100px;
+  background: var(--slate-100);
+  border: 1px solid var(--slate-200);
+  color: var(--slate-600);
+}
+
+.stat-pill b {
+  color: var(--royal);
+}
+
+/* ===============================
+   HEADER ACTION BUTTONS
+   =============================== */
+.action-stack {
+  display: flex;
+  gap: 12px;
+}
+
+.primary-btn {
+  background: linear-gradient(135deg, var(--royal), var(--sky));
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.primary-btn:hover {
+  transform: translateY(-1px);
+  opacity: 0.9;
+}
+
+.secondary-btn {
+  background: white;
+  color: var(--navy);
+  border: 1.5px solid var(--slate-200);
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* ===============================
+   CONTENT CANVAS
+   =============================== */
+.mgmt-container-focused {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 0 20px;
+}
+
+.drag-helper-text {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--slate-600);
+  margin-bottom: 20px;
+  display: flex;
+  gap: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ===============================
+   DRAG FEEDBACK
+   =============================== */
+.q-editor-wrapper.is-dragging {
+  opacity: 0.9;
+  transform: scale(1.01);
+  box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+}
+
+/* ===============================
+   LOADER
+   =============================== */
+.admin-loader-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+  justify-content: center;
+}
+
+.loader-orbit {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--slate-100);
+  border-top-color: var(--royal);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ===============================
+   EMPTY STATE (COMPACT)
+   =============================== */
+.empty-state-compact {
+  max-width: 400px;
+  margin: 100px auto;
+  padding: 20px;
+  background: white;
+  border: 1.5px dashed var(--slate-200);
+  border-radius: 16px;
+  display: flex;
+  gap: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.empty-state-compact:hover {
+  border-color: var(--sky);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
+
+.compact-plus {
+  width: 50px;
+  height: 50px;
+  background: var(--slate-50);
+  color: var(--sky);
+  font-size: 24px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+}
+
+/* ===============================
+   ADD QUESTION CTA
+   =============================== */
+.ghost-add-btn {
+  width: 100%;
+  padding: 16px;
+  border-radius: 12px;
+  border: 2px dashed var(--slate-200);
+  background: transparent;
+  color: var(--slate-600);
+  font-size: 13px;
+  font-weight: 700;
+  margin-top: 20px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.ghost-add-btn:hover {
+  border-color: var(--sky);
+  color: var(--sky);
+  background: #f0f7ff;
+}
+
+
+/* EMPTY STATE TEXT – "Form is empty" */
+.empty-text-stack h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--navy);   /* <-- CHANGE THIS COLOR */
+}
+
+/* EMPTY STATE SUBTEXT – "Click to add your first question" */
+.empty-text-stack p {
+  margin: 2px 0 0 0;
+  font-size: 12px;
+  color: var(--slate-600); /* <-- CHANGE THIS COLOR */
+}
+
+
+
+
+/* =========================================================
+   ORGANIZATION PAGE — FIXED / IMMUTABLE SECTION STYLES
+   ========================================================= */
+
+/* Divider separating editable and system-required fields */
+.section-divider {
+  margin: 50px 0 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--slate-600);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.section-divider::before,
+.section-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--slate-200);
+}
+
+/* Wrapper for immutable question */
+.is-fixed-wrapper {
+  opacity: 0.92;
+  pointer-events: none; /* Prevent edits */
+}
+
+/* Slight visual distinction */
+.is-fixed-wrapper .q-master-card {
+  background: #f9fafb;
+  border: 1px dashed var(--slate-200);
+}
+
+/* Optional subtle lock emphasis */
+.is-fixed-wrapper .q-header {
+  filter: grayscale(0.2);
+}
+

@@ -1,0 +1,182 @@
+:root {
+  --maroon: #800000;
+  --maroon-hover: #a00000;
+  --maroon-tint: #fff8f8;
+  --navy: #002147;
+  --white: #ffffff;
+  --slate-200: #e2e8f0;
+  --slate-400: #94a3b8;
+  --slate-600: #475569;
+  --grad-premium: linear-gradient(135deg, #800000 0%, #002147 100%);
+}
+
+.login-wrapper {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f1f5f9;
+  font-family: 'Inter', sans-serif;
+}
+
+.login-container {
+  display: flex;
+  width: 780px;
+  min-height: 480px;
+  background: var(--white);
+  border-radius: 24px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.18);
+  overflow: hidden;
+  animation: containerAppear 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* LEFT ACCENT */
+.login-accent-box {
+  flex: 0.95;
+  background: var(--grad-premium);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  padding: 40px;
+}
+
+.logo-stack {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  background: var(--white);
+  padding: 14px 20px;
+  border-radius: 16px;
+  margin-bottom: 24px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+.brand-logo { height: 38px; width: auto; }
+.logo-divider { width: 1px; height: 28px; background: var(--slate-200); }
+
+/* ANIMATION: FLOATING LOGOS */
+.animate-float {
+  animation: floatEffect 4s ease-in-out infinite;
+}
+
+@keyframes floatEffect {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.branding-text h2 { font-size: 1.5rem; font-weight: 800; margin-bottom: 4px; }
+.branding-text p { opacity: 0.85; font-size: 0.85rem; }
+.portal-badge {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 4px 12px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 100px;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+/* RIGHT FORM */
+.login-form-box {
+  flex: 1.05;
+  padding: 45px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.form-header h3 { color: var(--navy); font-size: 1.6rem; margin-bottom: 8px; font-weight: 800; }
+.form-header p { color: var(--slate-600); margin-bottom: 30px; font-size: 0.9rem; }
+
+/* INPUT GROUPS */
+.modern-form { display: flex; flex-direction: column; gap: 20px; }
+.input-group { display: flex; flex-direction: column; gap: 8px; }
+
+.input-label {
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: var(--maroon);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.prominent-input {
+  padding: 14px 16px;
+  border-radius: 10px;
+  border: 1.5px solid #fecdd3;
+  background: var(--maroon-tint);
+  font-size: 1rem;
+  color: var(--navy) !important;
+  transition: all 0.25s ease;
+}
+
+.prominent-input:focus {
+  outline: none;
+  border-color: var(--maroon);
+  background: var(--white);
+  box-shadow: 0 4px 12px rgba(128, 0, 0, 0.08);
+}
+
+/* GRADIENT BUTTON */
+.login-btn-gradient {
+  background: var(--grad-premium);
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+}
+
+.login-btn-gradient:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(128, 0, 0, 0.2);
+  filter: brightness(1.1);
+}
+
+/* DECORATIVE */
+.accent-circle-top {
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 150px;
+  height: 150px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 50%;
+}
+
+.accent-circle-bottom {
+  position: absolute;
+  bottom: -20px;
+  left: -20px;
+  width: 100px;
+  height: 100px;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 50%;
+}
+
+.form-footer { margin-top: 30px; text-align: center; font-size: 11px; color: var(--slate-400); }
+
+@keyframes containerAppear {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-shake {
+  animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+@keyframes shake {
+  10%, 90% { transform: translate3d(-1px, 0, 0); }
+  20%, 80% { transform: translate3d(2px, 0, 0); }
+  30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+  40%, 60% { transform: translate3d(4px, 0, 0); }
+}

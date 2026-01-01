@@ -1,0 +1,233 @@
+import { useEffect, useState } from "react";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../../firebase";
+import QuestionRenderer from "../../components/public/QuestionRenderer";
+
+/* ===================== THEME CONSTANTS ===================== */
+const COLORS = {
+  maroon: "#7a0c0c",
+  blue: "#0b3c5d",
+  text: "#1f2937",
+  muted: "#64748b",
+  error: "#dc2626",
+  bg: "#f8fafc"
+};
+
+const UI_SCALE = 0.7;
+const s = (v) => `${v * UI_SCALE}px`;
+const n = (v) => v * UI_SCALE;
+
+
+export default function UserInfoStep({
+  enrollmentData,
+  participantIndex,
+  setEnrollmentData,
+  onNext,
+  onBack,
+}) {
+  const [questions, setQuestions] = useState([]);
+  const [answers, setAnswers] = useState({});
+  const [hasSubmitted, setHasSubmitted] = useState(false); // Tracks "Proceed" attempts
+
+  /* ===================== LOAD EXISTING PARTICIPANT DATA ===================== */
+  useEffect(() => {
+    const existing = enrollmentData.participants?.[participantIndex]?.userInfo || {};
+    setAnswers(existing);
+    setHasSubmitted(false); // Reset validation UI when switching participants
+  }, [participantIndex, enrollmentData.participants]);
+
+  /* ===================== LOAD QUESTIONS ===================== */
+  useEffect(() => {
+    async function load() {
+      const snap = await getDoc(doc(db, "formConfig", "mainConfig"));
+      if (snap.exists()) {
+        setQuestions(snap.data().sections?.userInfo?.questions || []);
+      }
+    }
+    load();
+  }, []);
+
+  const update = (id, val) => {
+    setAnswers((prev) => ({ ...prev, [id]: val }));
+  };
+
+  /* ===================== VALIDATION LOGIC ===================== */
+  const getMissingFields = () => {
+    return questions.filter(q => q.required && (!answers[q.id] || answers[q.id] === ""));
+  };
+
+  function proceed() {
+    setHasSubmitted(true); // Trigger highlighting in QuestionRenderer
+    
+    const missing = getMissingFields();
+
+    if (missing.length > 0) {
+      // Scroll the first missing question into view
+      const firstMissing = document.getElementById(`scroll-target-${missing[0].id}`);
+      if (firstMissing) {
+        firstMissing.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+      return; // Stop execution
+    }
+
+    // If valid, save and move on
+    const newParticipants = [...(enrollmentData.participants || [])];
+    newParticipants[participantIndex] = {
+      ...newParticipants[participantIndex],
+      userInfo: answers,
+    };
+
+    setEnrollmentData({
+      ...enrollmentData,
+      participants: newParticipants,
+    });
+
+    onNext();
+  }
+
+  return (
+    <div style={styles.container}>
+      <header style={styles.header}>
+        <h2 style={styles.title}>Participant Information</h2>
+        <div style={styles.badge}>
+          Participant {participantIndex + 1}
+        </div>
+      </header>
+
+      <p style={styles.subtitle}>
+        Please provide the following details to complete the enrollment process.
+      </p>
+
+      {/* VALIDATION ALERT */}
+      {hasSubmitted && getMissingFields().length > 0 && (
+        <div style={styles.errorAlert}>
+          Please fill in all required fields highlighted in red.
+        </div>
+      )}
+
+      {/* QUESTIONS SCROLL AREA */}
+      <div style={styles.scrollArea}>
+        {questions.map((q) => (
+          <div key={q.id} id={`scroll-target-${q.id}`}>
+            <QuestionRenderer
+              question={q}
+              value={answers[q.id]}
+              onChange={(val) => update(q.id, val)}
+              highlightEmpty={hasSubmitted}
+            />
+          </div>
+        ))}
+      </div>
+
+      {/* NAVIGATION */}
+      <div style={styles.btnRow}>
+        <button onClick={onBack} style={styles.backBtn}>
+          Back
+        </button>
+
+        <button onClick={proceed} style={styles.nextBtn}>
+          <span>Continue</span>
+          <span style={styles.arrowIcon}>→</span>
+        </button>
+      </div>
+    </div>
+  );
+}
+
+/* ===================== STYLES ===================== */
+const styles = {
+  container: {
+    maxWidth: s(650),
+    margin: "0 auto",
+  },
+
+  header: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: s(8),
+  },
+
+  title: {
+    fontSize: s(22),
+    color: COLORS.blue,
+    margin: 0,
+    fontWeight: 700,
+  },
+
+  badge: {
+    backgroundColor: COLORS.blue,
+    color: "white",
+    fontSize: s(12),
+    padding: `${s(4)} ${s(12)}`,
+    borderRadius: s(20),
+    fontWeight: 500,
+  },
+
+  subtitle: {
+    color: COLORS.muted,
+    marginBottom: s(24),
+    fontSize: s(15),
+  },
+
+  errorAlert: {
+    backgroundColor: "#fef2f2",
+    color: COLORS.error,
+    padding: `${s(12)} ${s(16)}`,
+    borderRadius: s(8),
+    marginBottom: s(20),
+    fontSize: s(14),
+    fontWeight: 500,
+    border: `1px solid ${COLORS.error}`,
+  },
+
+  scrollArea: {
+    maxHeight: s(500),
+    overflowY: "auto",
+    paddingRight: s(10),
+    marginBottom: s(10),
+    scrollbarWidth: "thin",
+    scrollbarColor: `${COLORS.blue} transparent`,
+  },
+
+  btnRow: {
+    display: "flex",
+    gap: s(16),
+    marginTop: s(24),
+    borderTop: "1px solid #e2e8f0",
+    paddingTop: s(24),
+  },
+
+  nextBtn: {
+    flex: 2,
+    background: `linear-gradient(135deg, ${COLORS.maroon} 0%, #4d0000 100%)`,
+    color: "white",
+    padding: s(16),
+    borderRadius: s(12),
+    fontWeight: 600,
+    border: "none",
+    cursor: "pointer",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    gap: s(8),
+    transition: "transform 0.1s active",
+    boxShadow: "0 4px 12px rgba(122, 12, 12, 0.2)",
+  },
+
+  backBtn: {
+    flex: 1,
+    background: "white",
+    color: COLORS.blue,
+    border: `2px solid ${COLORS.blue}`,
+    padding: s(16),
+    borderRadius: s(12),
+    fontWeight: 600,
+    cursor: "pointer",
+    transition: "background 0.2s",
+  },
+
+  arrowIcon: {
+    fontSize: s(18),
+  },
+};
