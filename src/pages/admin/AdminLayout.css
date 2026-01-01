@@ -210,3 +210,25 @@ body, html, #root {
   width: 92%;
   max-width: 1800px;
 }
+
+/* =========================================================
+   SMART FLOATING HEADER BEHAVIOR
+   ========================================================= */
+
+.admin-header-floating {
+  transition:
+    transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.3s ease;
+  will-change: transform;
+}
+
+/* Hidden while scrolling down */
+.admin-header-floating.is-hidden {
+  transform: translateY(-110%);
+  box-shadow: none;
+}
+
+/* Visible (default / on scroll up) */
+.admin-header-floating.is-visible {
+  transform: translateY(0);
+}

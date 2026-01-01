@@ -296,3 +296,139 @@
   filter: grayscale(0.2);
 }
 
+
+/* =========================================================
+   RESPONSIVE ENHANCEMENTS (Mobile & Tablet)
+   Desktop styles remain untouched
+   ========================================================= */
+
+/* ---------- Tablets (<= 900px) ---------- */
+@media (max-width: 900px) {
+  .header-inner {
+    max-width: 100%;
+    gap: 20px;
+  }
+
+  .mgmt-container-focused {
+    max-width: 100%;
+  }
+}
+
+/* ---------- Mobile (<= 640px) ---------- */
+@media (max-width: 640px) {
+
+  /* ===== Header Layout ===== */
+  .mgmt-header-premium {
+    padding: 16px 0;
+  }
+
+  .mgmt-header-premium.is-scrolled {
+    padding: 12px 0;
+  }
+
+  .header-inner {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+  }
+
+  /* Brand text */
+  .brand-stack h1 {
+    font-size: 1.1rem;
+  }
+
+  .brand-stack h2 {
+    font-size: 11px;
+    padding-left: 0;
+    margin-top: 2px;
+  }
+
+  /* Stats wrap nicely */
+  .form-stats-bar {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  /* ===== Header Actions ===== */
+  .action-stack {
+    width: 100%;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .primary-btn,
+  .secondary-btn {
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 14px;
+  }
+
+  /* ===== Content Area ===== */
+  .mgmt-container-focused {
+    margin-top: 16px;
+    padding: 0 14px;
+  }
+
+  .drag-helper-text {
+    font-size: 10px;
+    margin-bottom: 14px;
+  }
+
+  /* ===== Question Cards ===== */
+  .q-editor-wrapper {
+    border-radius: 14px;
+  }
+
+  /* Slightly reduce drag scale on mobile */
+  .q-editor-wrapper.is-dragging {
+    transform: scale(1.005);
+  }
+
+  /* ===== Empty State ===== */
+  .empty-state-compact {
+    margin: 60px auto;
+    padding: 16px;
+    gap: 14px;
+    flex-direction: row;
+  }
+
+  .compact-plus {
+    width: 42px;
+    height: 42px;
+    font-size: 22px;
+  }
+
+  .empty-text-stack h3 {
+    font-size: 13px;
+  }
+
+  .empty-text-stack p {
+    font-size: 11px;
+  }
+
+  /* ===== Add Question CTA ===== */
+  .ghost-add-btn {
+    padding: 14px;
+    font-size: 13px;
+    border-radius: 10px;
+  }
+}
+
+/* ---------- Small Phones (<= 420px) ---------- */
+@media (max-width: 420px) {
+
+  .brand-stack h1 {
+    font-size: 1rem;
+  }
+
+  .primary-btn,
+  .secondary-btn {
+    font-size: 13px;
+  }
+
+  .stat-pill {
+    font-size: 9px;
+    padding: 3px 6px;
+  }
+}
+

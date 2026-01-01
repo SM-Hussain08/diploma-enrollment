@@ -76,6 +76,27 @@ input:checked + .q-toggle-slider::before {
   transform: translateX(16px);
 }
 
+/* HEADER DELETE (always visible) */
+.q-header-delete {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.q-header-delete:hover {
+  background: rgba(239, 68, 68, 0.9);
+}
+
+
 /* INPUT */
 .q-label-input {
   flex: 1;
@@ -392,5 +413,157 @@ select {
 .q-minimize-btn.bottom:hover {
   background: #d1d5db;
 }
+
+
+/* =========================================================
+   RESPONSIVE — QUESTION EDITOR
+   Desktop untouched
+   ========================================================= */
+
+/* ---------- Tablets ---------- */
+@media (max-width: 900px) {
+  .q-header {
+    gap: 10px;
+  }
+
+  .q-label-input {
+    font-size: 14px;
+  }
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 640px) {
+
+  /* Header wraps cleanly */
+  .q-header {
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 12px;
+  }
+
+  .q-header-left {
+    gap: 10px;
+  }
+
+  .q-header-right {
+    margin-left: auto;
+    gap: 6px;
+  }
+
+  /* Question text */
+  .q-label-input {
+    width: 100%;
+    font-size: 14px;
+    margin-top: 6px;
+  }
+
+  /* Make delete easier to tap */
+  .q-header-delete {
+    width: 30px;
+    height: 30px;
+    font-size: 15px;
+  }
+
+  /* Body spacing */
+  .q-body {
+    padding: 14px;
+  }
+
+  .q-settings-card {
+    padding: 12px;
+  }
+
+  /* Option rows */
+  .q-opt-row {
+    gap: 8px;
+    padding: 8px;
+  }
+
+  .q-opt-input {
+    font-size: 14px;
+  }
+
+  /* Show option delete always on mobile */
+  .q-opt-delete {
+    opacity: 1;
+  }
+
+  /* Danger zone stacks */
+  .q-danger-zone {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 10px;
+    text-align: left;
+  }
+
+  .q-delete-btn,
+  .q-minimize-btn.bottom {
+    width: 100%;
+    padding: 10px;
+    font-size: 13px;
+  }
+}
+
+/* ---------- Small phones ---------- */
+@media (max-width: 420px) {
+  .q-type-pill {
+    font-size: 9px;
+    padding: 3px 6px;
+  }
+
+  .q-badge {
+    font-size: 9px;
+  }
+}
+
+
+/* =========================================================
+   HEADER — MULTI-LINE QUESTION TEXT
+   Buttons move to bottom-right
+   ========================================================= */
+
+.q-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  row-gap: 6px;
+}
+
+/* LEFT CONTROLS (toggle + drag) */
+.q-header-left {
+  flex-shrink: 0;
+}
+
+/* QUESTION TEXT — FULL WIDTH ROW */
+.q-label-input {
+  flex: 1 1 100%;
+  min-width: 0;
+  white-space: normal;
+  word-break: break-word;
+  line-height: 1.35;
+}
+
+/* RIGHT CONTROLS MOVE TO BOTTOM RIGHT */
+.q-header-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Slight visual separation for bottom-right controls */
+.q-header-right {
+  margin-top: 2px;
+}
+
+/* Make delete button visually lighter until hover */
+.q-header-delete {
+  opacity: 0.85;
+}
+.q-header-delete:hover {
+  opacity: 1;
+}
+
 
 

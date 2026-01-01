@@ -1,3 +1,5 @@
+import { useEffect, useRef } from "react";
+
 import { Link, Outlet, useLocation } from "react-router-dom";
 import { logoutAdmin } from "../../utils/auth";
 import ibaLogo from "../../assets/iba-logo.png";
@@ -6,6 +8,46 @@ import "./AdminLayout.css";
 
 export default function AdminLayout() {
   const location = useLocation();
+  const lastScrollY = useRef(0);
+
+  useEffect(() => {
+    const header = document.querySelector(".admin-header-floating");
+    if (!header) return;
+
+    let ticking = false;
+
+    const onScroll = () => {
+      const currentY = window.scrollY;
+      const delta = currentY - lastScrollY.current;
+
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          // Hide on scroll down
+          if (delta > 15 && currentY > 80) {
+            header.classList.add("is-hidden");
+            header.classList.remove("is-visible");
+          }
+
+          // Show on slight scroll up
+          if (delta < -10) {
+            header.classList.remove("is-hidden");
+            header.classList.add("is-visible");
+          }
+
+          lastScrollY.current = currentY;
+          ticking = false;
+        });
+
+        ticking = true;
+      }
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+
 
   const navLinks = [
     { path: "/admin/dashboard", label: "Primary" },

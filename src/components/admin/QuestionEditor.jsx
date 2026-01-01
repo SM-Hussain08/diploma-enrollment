@@ -69,10 +69,25 @@ export default function QuestionEditor({ question, index, onChange, onDelete }) 
           {question.required && <span className="q-badge required">Required</span>}
           {isLocked && <span className="q-badge lock">Locked</span>}
 
-          <span className="q-type-pill">
+          <span className="q-type-pill">  
             {QUESTION_TYPES.find((t) => t.value === type)?.label}
           </span>
+
+          {/* 🔴 Always-visible delete (even when minimized) */}
+          {!isLocked && (
+            <button
+              className="q-header-delete"
+              onClick={(e) => {
+                e.stopPropagation();
+                onDelete(index);
+              }}
+              title="Delete question"
+            >
+              ✕
+            </button>
+          )}
         </div>
+        
       </div>
 
       {/* ================= BODY ================= */}
