@@ -71,7 +71,7 @@
   /* ✨ Subtle animation */
   animation:
     logoFloat 5s ease-in-out infinite,
-    logoPulse 6.5s ease-in-out infinite;
+    logoPulse 3s ease-in-out infinite;
 }
 
 
@@ -88,11 +88,11 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background: var(--white);
+  background: #eeb7b7;
 }
 
 .form-header h3 { color: var(--navy); font-size: 1.75rem; font-weight: 800; }
-.form-header p { color: var(--slate-600); margin-bottom: 32px; font-size: 0.95rem; }
+.form-header p { color: var(--navy); margin-bottom: 32px; font-size: 0.95rem; }  /* label 1 */
 
 /* INPUTS - Explicitly colored labels */
 .modern-form { 
@@ -188,7 +188,7 @@
   border-radius: 50%;
 }
 
-.form-footer { margin-top: 30px; text-align: center; font-size: 11px; color: var(--slate-400); }
+.form-footer { margin-top: 30px; text-align: center; font-size: 11px; color: var(--navy); } /* label 2*/
 
 @keyframes containerAppear {
   from { opacity: 0; transform: translateY(15px); }
@@ -207,10 +207,45 @@
 @keyframes logoPulse {
   0%, 100% {
     transform: scale(1);
-    box-shadow: var(--shadow-sm);
+    filter: brightness(1);
   }
   50% {
-    transform: scale(1.025);
-    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.18);
+    transform: scale(1.08); /* Increased from 1.025 for more prominence */
+    filter: brightness(1.05);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
   }
+}
+
+/* ALERT BOX STYLING */
+.login-alert-danger {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff0f0;
+  border-left: 4px solid var(--maroon);
+  color: var(--maroon);
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-top: -8px; /* Pull it closer to the inputs */
+  box-shadow: 0 4px 12px rgba(128, 0, 0, 0.1);
+}
+
+.alert-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+/* SHAKE ANIMATION */
+.animate-shake {
+  animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+@keyframes shake {
+  10%, 90% { transform: translate3d(-1px, 0, 0); }
+  20%, 80% { transform: translate3d(2px, 0, 0); }
+  30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+  40%, 60% { transform: translate3d(4px, 0, 0); }
 }

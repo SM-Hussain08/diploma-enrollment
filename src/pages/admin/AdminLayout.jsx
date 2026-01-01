@@ -1,12 +1,13 @@
 import { useEffect, useRef } from "react";
-
-import { Link, Outlet, useLocation } from "react-router-dom";
 import { logoutAdmin } from "../../utils/auth";
 import ibaLogo from "../../assets/iba-logo.png";
 import ceeLogo from "../../assets/cee-logo.png";
 import "./AdminLayout.css";
 
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
+
 export default function AdminLayout() {
+  const navigate = useNavigate();
   const location = useLocation();
   const lastScrollY = useRef(0);
 
@@ -100,7 +101,8 @@ export default function AdminLayout() {
               className="logout-btn-compact"
               onClick={() => {
                 logoutAdmin();
-                window.location.href = "/admin/login";
+                // CHANGED THIS: replace: true overwrites history
+                navigate("/admin/login", { replace: true });
               }}
             >
               Sign Out
