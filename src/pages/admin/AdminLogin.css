@@ -67,7 +67,13 @@
   margin-bottom: 24px;
   box-shadow: var(--shadow-sm);
   z-index: 2;
+
+  /* ✨ Subtle animation */
+  animation:
+    logoFloat 5s ease-in-out infinite,
+    logoPulse 6.5s ease-in-out infinite;
 }
+
 
 .brand-logo { height: 34px; width: auto; }
 .logo-divider { width: 1px; height: 26px; background: var(--slate-200); }
@@ -187,4 +193,24 @@
 @keyframes containerAppear {
   from { opacity: 0; transform: translateY(15px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes logoFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes logoPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: var(--shadow-sm);
+  }
+  50% {
+    transform: scale(1.025);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.18);
+  }
 }
